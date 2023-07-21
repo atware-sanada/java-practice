@@ -1,57 +1,40 @@
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 public class Player {
     private String name;
-    private int[] handNum = {0};
-    private int hand;
-
+    /* 合計の計算結果 */
+    private int calcCard = 0;
+    /* 引いたカードのリスト */
+    private List<Integer> cardList = new ArrayList<Integer>();
+    /* ヒットしている状態 */
+    private boolean isHit;
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public List<Integer> getCardList() {
+        return cardList;
     }
 
-    public void setHandNum(int handNum) {
-            int i = this.handNum.length - 1;
-            this.handNum[i] = handNum;
-            makeArray(this.handNum);
-    }
-
-    public void makeArray(int[] beforeArray) {
-        int[] afterArray = new int[beforeArray.length + 1];
-        for(int i = 0; i < beforeArray.length; i++){
-            afterArray[i] = beforeArray[i];
-        }
-        this.handNum = afterArray;
-    }
-
-    // 名前を入力
-    public void nameEntry() {
-        Scanner scan = new Scanner(System.in);
-        String name = scan.next();
-        setName(name);
-    }
-
-    // もう一度手札を受け取るか選択（0:はい、1:いいえ）
-    public boolean handEntry() {
+    // ヒットするならH、ステイするならSを入力する
+    public void hitOrStay() {
         Scanner scan = new Scanner(System.in);
         hand = scan.nextInt();
-        if(hand == 0) {
-            return true;
-        } else if (hand == 1) {
-            return false;
+    }
+    // 引いたカードのリストを全て合算する
+    public void calcCardList() {
+        for(int i = 0; i < cardList.size(); i++){
+            calcCard += cardList.get(i);
+            setCalcCard(calcCard);
         }
-        return false;
     }
 
-    // 元々持っていた手札の数とDealerから受け取った手札の数を加算する
-    public int handSum() {
-        int handSum = 0;
-        for(int i = 0; i < this.handNum.length; i++){
-            handSum += this.handNum[i];
-        }
-        return handSum;
+    public int getCalcCard() {
+        return calcCard;
+    }
+
+    public void setCalcCard(int calcCard) {
+        this.calcCard = calcCard;
     }
 
 }
