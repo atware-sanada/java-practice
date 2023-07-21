@@ -1,21 +1,23 @@
 public class Dealer {
 
     private int[] handNum = {0};
-    public void start() {
-        Player player = new Player();
+    private final Player player = new Player();
+
+    public void startGame() {
         greeting();
         player.nameEntry();
-        distributionAnnounce(player);
-        handNumDistributionToPlayer(player);
-        handNumDistributionToDealer();
+        distributeAnnounce(player);
+        distributeHandNum(player);
         handSumAnnounce(player);
-        repeatDistributionAnnounce();
+        repeatDistributeAnnounce();
+    }
+
+    public void judge() {
         while(player.handEntry()){
-            distributionAnnounce2();
-            handNumDistributionToPlayer(player);
+            distributeHandNumToPlayer(player);
             if (player.handSum() < 21) {
                 handSumAnnounce(player);
-                repeatDistributionAnnounce();
+                repeatDistributeAnnounce();
             } else {
                 handSumAnnounce(player);
                 System.out.println(player.getName() + "さんの手札の合計が21以上になったので自動的に結果発表に移ります");
@@ -23,11 +25,21 @@ public class Dealer {
             }
         }
         while (handSum() < 18){
-            handNumDistributionToDealer();
+            distributeHandNumToDealer();
         }
-        resultAnnounce1(player);
-        resultAnnounce2();
+        announceResult(player);
         checkResult(player);
+    }
+
+
+    public void start() {
+        startGame();
+        judge();
+    }
+
+    private void distributeHandNum(Player player) {
+        distributeHandNumToPlayer(player);
+        distributeHandNumToDealer();
     }
 
     public void greeting() {
@@ -40,18 +52,18 @@ public class Dealer {
         System.out.println("まずはじめにお名前を入力して下さい");
     }
 
-    public void distributionAnnounce(Player player) {
+    public void distributeAnnounce(Player player) {
         System.out.println(player.getName() + "さんですね。");
         System.out.println("これから１枚手札をお配りします");
     }
 
     // DealerがPlayerに１〜１３のランダムな数字を渡す
-    public void handNumDistributionToPlayer(Player player) {
+    public void distributeHandNumToPlayer(Player player) {
        int handNum = (int)(Math.random() * 13 + 1);
        player.setHandNum(handNum);
     }
 
-    public void handNumDistributionToDealer() {
+    public void distributeHandNumToDealer() {
         int handNum = (int)(Math.random() * 13 + 1);
         setHandNum(handNum);
     }
@@ -81,19 +93,12 @@ public class Dealer {
     public void handSumAnnounce(Player player) {
         System.out.println("あなたの手札の現時点での合計は" + player.handSum());
     }
-    public void repeatDistributionAnnounce() {
+    public void repeatDistributeAnnounce() {
         System.out.println("もう１枚手札を受け取りますか。（0：はい、1：いいえ）");
     }
 
-    public void distributionAnnounce2() {
-        System.out.println("もう１枚手札をお配りします");
-    }
-
-    public void resultAnnounce1(Player player) {
+    public void announceResult(Player player) {
         System.out.println(player.getName() + "さんの手札の合計は" + player.handSum() + "です");
-    }
-
-    public void resultAnnounce2() {
         System.out.println("私の手札の合計は" + handSum() + "です");
     }
 

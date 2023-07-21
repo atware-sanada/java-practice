@@ -18,6 +18,7 @@ public class Player {
             makeArray(this.handNum);
     }
 
+    // 1つ要素の大きい配列を新たに作成、元々あった値を代入
     public void makeArray(int[] beforeArray) {
         int[] afterArray = new int[beforeArray.length + 1];
         for(int i = 0; i < beforeArray.length; i++){
