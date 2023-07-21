@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
 public class Player {
     private String name;
     /* 合計の計算結果 */
@@ -7,7 +9,10 @@ public class Player {
     /* 引いたカードのリスト */
     private List<Integer> cardList = new ArrayList<Integer>();
     /* ヒットしている状態 */
-    private boolean isHit;
+    private boolean isHit = false;
+    /* ステイしている状態 */
+    private boolean isStay = false;
+
     public String getName() {
         return name;
     }
@@ -19,7 +24,12 @@ public class Player {
     // ヒットするならH、ステイするならSを入力する
     public void hitOrStay() {
         Scanner scan = new Scanner(System.in);
-        hand = scan.nextInt();
+        String selection = scan.next();
+        if(selection.equals("H") || selection.equals("h")) {
+            this.isHit = true;
+        } else if (selection.equals("S") || selection.equals("s")) {
+            this.isStay = true;
+        }
     }
     // 引いたカードのリストを全て合算する
     public void calcCardList() {
