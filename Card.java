@@ -5,6 +5,7 @@ import java.util.Random;
 public class Card {
     private String mark;
     private int number;
+    private String name;
     private List<Card> cardDeck = new ArrayList<Card>();
 
     Card(String mark, int number) {
@@ -19,10 +20,25 @@ public class Card {
                 cardDeck.add(new Card(mark,i));
             }
         }
+        declareName();
+    }
+
+    public void declareName() {
+        if(number == 1) {
+            name = "A";
+        } else if (number == 11) {
+            name = "J";
+        } else if (number == 12) {
+            name = "Q";
+        } else if (number == 13) {
+            name = "K";
+        } else {
+            name = String.valueOf(number);
+        }
     }
 
     public int getNumber() {
-        return this.number;
+        return number;
     }
 
     public Card dealCard() {

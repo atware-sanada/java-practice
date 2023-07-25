@@ -47,7 +47,17 @@ public class Player {
     public void calcCardListOfPlayer() {
         this.calcCardOfPlayer = 0;
         for(Card card : cardListOfPlayer){
-            calcCardOfPlayer += card.getNumber();
+            if(card.getNumber() == 1) {
+                if(21 - calcCardOfPlayer > 11) {
+                    calcCardOfPlayer += 11;
+                } else {
+                    calcCardOfPlayer += 1;
+                }
+            } else if (card.getNumber() >= 11) {
+                calcCardOfPlayer += 10;
+            } else {
+                calcCardOfPlayer += card.getNumber();
+            }
             setCalcCardOfPlayer(calcCardOfPlayer);
         }
     }
@@ -56,7 +66,17 @@ public class Player {
     public void calcCardListOfDealer() {
         this.calcCardOfDealer = 0;
         for(Card card : cardListOfDealer){
-            calcCardOfDealer += card.getNumber();
+            if(card.getNumber() == 1) {
+                if(21 - calcCardOfDealer > 11) {
+                    calcCardOfDealer += 11;
+                } else {
+                    calcCardOfDealer += 1;
+                }
+            } else if (card.getNumber() >= 11) {
+                calcCardOfDealer += 10;
+            } else {
+                calcCardOfDealer += card.getNumber();
+            }
             setCalcCardOfDealer(calcCardOfDealer);
         }
     }
@@ -110,7 +130,7 @@ public class Player {
     }
 
     public void showCalcCardOfDealer() {
-        System.out.printf("ディーラーの最終的な手札の合計は%dです%n", calcCardOfDealer);
+        System.out.printf("%nディーラーの最終的な手札の合計は%dです%n", calcCardOfDealer);
     }
 
     public void judge() {
