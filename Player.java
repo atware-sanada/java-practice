@@ -103,7 +103,12 @@ public class Player {
 
     public void distributeToPlayer() {
         // プレイヤーにカードを配る
-        Card cardOfPlayer = card.dealCard();
+        Card cardOfPlayer = null;
+        try {
+            cardOfPlayer = card.dealCard();
+        } catch (NullPointerException e) {
+            throw new RuntimeException(e);
+        }
         // 配られたカードをプレイヤーのデッキに加える
         getCardListOfPlayer().add(cardOfPlayer);
         // プレイヤーに配られたカードをカードデッキから減らす

@@ -1,12 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Random;
 
 public class Card {
     private String mark;
     private int number;
-    private String name;
+//    private String name;
     private List<Card> cardDeck = new ArrayList<Card>();
 
     Card(String mark, int number) {
@@ -21,23 +20,26 @@ public class Card {
                 cardDeck.add(new Card(mark,i));
             }
         }
-        declareName();
+//        declareName();
     }
 
-    public void declareName() {
-        if(number == 1) {
-            name = "A";
-        } else if (number == 11) {
-            name = "J";
-        } else if (number == 12) {
-            name = "Q";
-        } else if (number == 13) {
-            name = "K";
-        } else {
-            name = String.valueOf(number);
-        }
-    }
+//    public void declareName() {
+//        if(number == 1) {
+//            name = "A";
+//        } else if (number == 11) {
+//            name = "J";
+//        } else if (number == 12) {
+//            name = "Q";
+//        } else if (number == 13) {
+//            name = "K";
+//        } else {
+//            name = String.valueOf(number);
+//        }
+//    }
 
+    public List<Card> getCardDeck() {
+        return cardDeck;
+    }
     public String getMark() {
         return mark;
     }
@@ -50,8 +52,9 @@ public class Card {
         return cardDeck.size();
     }
 
-    public Card dealCard() {
+    public Card dealCard() throws NullPointerException{
         int randomNum = new Random().nextInt(cardDeck.size());
+        System.out.println(cardDeck.get(1));
         return cardDeck.get(randomNum); // getメソッドの中身は配列のindexが入る
     }
 
