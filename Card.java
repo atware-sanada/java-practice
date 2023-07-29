@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 public class Card {
@@ -37,8 +38,16 @@ public class Card {
         }
     }
 
+    public String getMark() {
+        return mark;
+    }
+
     public int getNumber() {
         return number;
+    }
+
+    public int cardDeckSize() { //52枚あるかどうか確認
+        return cardDeck.size();
     }
 
     public Card dealCard() {
@@ -50,4 +59,16 @@ public class Card {
         cardDeck.remove(card);
     }
 
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Card card = (Card) o;
+//        return number == card.number && Objects.equals(mark, card.mark);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(mark, number);
+//    }
 }
